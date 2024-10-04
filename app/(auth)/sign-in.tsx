@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import FontAwesome from "react-native-vector-icons/FontAwesome"; // Import Font Awesome for icons
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useRouter } from "expo-router";
 
 const SignIn = () => {
+  const router = useRouter();
+
   // Define state for email and password inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,8 +27,9 @@ const SignIn = () => {
             className="mr-2"
           />
           <TextInput
-            className="flex-1"
+            className="flex-1 ml-3 p-2"
             placeholder="Enter your email"
+            placeholderTextColor="#A0AEC0"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
@@ -40,8 +44,9 @@ const SignIn = () => {
         <View className="flex-row items-center border border-gray-300 rounded-full px-3 py-2">
           <FontAwesome name="lock" size={18} color="#A0AEC0" className="mr-2" />
           <TextInput
-            className="flex-1"
+            className="flex-1 ml-3 p-2"
             placeholder="Enter your password"
+            placeholderTextColor="#A0AEC0"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
@@ -61,13 +66,17 @@ const SignIn = () => {
       {/* Sign In with Google */}
       <TouchableOpacity className="bg-gray-100 py-4 px-6 rounded-full w-full flex-row justify-center items-center mb-4">
         <FontAwesome name="google" size={20} color="#4285F4" className="mr-3" />
-        <Text className="text-gray-700 text-base">Sign in with Google</Text>
+        <Text className="text-gray-700 text-base ml-3">
+          Sign in with Google
+        </Text>
       </TouchableOpacity>
 
       {/* Sign Up Link */}
       <Text className="text-gray-500 text-sm">
         Don’t have an account?{" "}
-        <Text className="text-purple-500 font-semibold">Sign Up</Text>
+        <TouchableOpacity onPress={() => router.push("/sign-up")}>
+          <Text className="text-purple-500 font-semibold">Sign Up</Text>
+        </TouchableOpacity>
       </Text>
     </SafeAreaView>
   );

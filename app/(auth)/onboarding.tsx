@@ -25,13 +25,15 @@ const Onboarding = () => {
 
       {/* Login with Google Button */}
       <TouchableOpacity className="bg-gray-100 py-4 px-6 rounded-full w-full flex-row justify-center items-center mb-4">
-        <Text className="text-gray-700 text-base">Login with Google</Text>
+        <Text className="text-gray-700 text-base ml-3">Login with Google</Text>
       </TouchableOpacity>
 
       {/* Sign Up Link */}
       <Text className="text-gray-500 text-sm">
         Don’t have an account?{" "}
-        <Text className="text-purple-500 font-semibold">Sign Up</Text>
+        <TouchableOpacity onPress={() => router.push("/sign-up")}>
+          <Text className="text-purple-500 font-semibold">Sign Up</Text>
+        </TouchableOpacity>
       </Text>
     </SafeAreaView>
   );
