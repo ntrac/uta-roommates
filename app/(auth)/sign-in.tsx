@@ -3,13 +3,37 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useRouter } from "expo-router";
+import { useSignIn } from "@clerk/clerk-expo";
 
 const SignIn = () => {
+  const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
 
   // Define state for email and password inputs
-  const [email, setEmail] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+
+  const onSignInPress = React.useCallback(async () => {
+    if (!isLoaded) {
+      return;
+    }
+
+    try {
+      const signInAttempt = await signIn.create({
+        identifier: emailAddress,
+        password,
+      });
+
+      if (signInAttempt.status === "complete") {
+        await setActive({ session: signInAttempt.createdSessionId });
+        router.replace("/");
+      } else {
+        console.error(JSON.stringify(signInAttempt, null, 2));
+      }
+    } catch (err: any) {
+      console.error(JSON.stringify(err, null, 2));
+    }
+  }, [isLoaded, emailAddress, password]);
 
   return (
     <SafeAreaView className="flex-1 justify-center items-center bg-white px-6">
@@ -30,8 +54,8 @@ const SignIn = () => {
             className="flex-1 ml-3 p-2"
             placeholder="Enter your email"
             placeholderTextColor="#A0AEC0"
-            value={email}
-            onChangeText={setEmail}
+            value={emailAddress}
+            onChangeText={setEmailAddress}
             keyboardType="email-address"
             autoCapitalize="none"
           />
@@ -56,7 +80,10 @@ const SignIn = () => {
       </View>
 
       {/* Sign In Button */}
-      <TouchableOpacity className="bg-purple-800 py-4 px-6 rounded-full w-full justify-center items-center mb-4">
+      <TouchableOpacity
+        className="bg-purple-800 py-4 px-6 rounded-full w-full justify-center items-center mb-4"
+        onPress={onSignInPress}
+      >
         <Text className="text-white text-base font-semibold">Sign In</Text>
       </TouchableOpacity>
 
