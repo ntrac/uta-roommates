@@ -88,15 +88,15 @@ const SignIn = () => {
       </TouchableOpacity>
 
       {/* Divider */}
-      <Text className="text-gray-500 text-sm my-4">OR</Text>
+      {/* <Text className="text-gray-500 text-sm my-4">OR</Text> */}
 
       {/* Sign In with Google */}
-      <TouchableOpacity className="bg-gray-100 py-4 px-6 rounded-full w-full flex-row justify-center items-center mb-4">
-        <FontAwesome name="google" size={20} color="#4285F4" className="mr-3" />
-        <Text className="text-gray-700 text-base ml-3">
+      {/* <TouchableOpacity className="bg-gray-100 py-4 px-6 rounded-full w-full flex-row justify-center items-center mb-4"> */}
+        {/* <FontAwesome name="google" size={20} color="#4285F4" className="mr-3" /> */}
+        {/* <Text className="text-gray-700 text-base ml-3">
           Sign in with Google
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       {/* Sign Up Link */}
       <Text className="text-gray-500 text-sm">

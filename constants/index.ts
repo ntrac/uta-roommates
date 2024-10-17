@@ -27,6 +27,7 @@ import check from "@/assets/images/check.png";
 import getStarted from "@/assets/images/get-started.png";
 import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
+import utalogo from "@/assets/images/utalogo.png";
 
 import signUpCar from "@/assets/images/signup-car.png";
 
@@ -36,6 +37,7 @@ export const images = {
     check,
     noResult,
     message,
+    utalogo,
 };
 
 export const icons = {
