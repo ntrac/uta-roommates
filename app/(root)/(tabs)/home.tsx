@@ -1,6 +1,7 @@
 import { SignedIn, SignedOut, useUser, useAuth } from "@clerk/clerk-expo";
+import { Entypo } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import React from "react";
+import React, { useRef } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Image } from "react-native";
 import Swiper from "react-native-deck-swiper";
@@ -38,6 +39,8 @@ export default function Page() {
   const { user } = useUser();
   const { signOut } = useAuth();
 
+  const swipeRef = useRef(null);
+
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -51,29 +54,30 @@ export default function Page() {
       <SignedIn>
       
       {/* card */}
-      <View className="flex-1 -mt-6">
-      <Swiper
-        containerStyle={{ backgroundColor: 'transparent' }}
-        cards={DUMMY_DATA}
-        stackSize={5}
-        cardIndex={0}
-        animateCardOpacity
-        verticalSwipe={false}
-        onSwipedLeft={() => console.log('Swiped PASS')}
-        onSwipedRight={() => console.log('Swiped MATCH')}
-        overlayLabels={{
-          left: {
-            title: 'NOPE',
-            style: {
+        <View className="flex-1 -mt-6">
+          <Swiper
+            ref={swipeRef}
+            containerStyle={{ backgroundColor: 'transparent' }}
+            cards={DUMMY_DATA}
+            stackSize={5}
+            cardIndex={0}
+            animateCardOpacity
+            verticalSwipe={false}
+            onSwipedLeft={() => console.log('Swiped PASS')}
+            onSwipedRight={() => console.log('Swiped MATCH')}
+            overlayLabels={{
+              left: {
+              title: 'NOPE',
+              style: {
               label: {
                 textAlign: 'right',
                 color: "red",
               }
             }
           },
-          right: {
-            title: 'MATCH',
-            style: {
+            right: {
+              title: 'MATCH',
+              style: {
               label: {
                 textAlign: 'left',
                 color: "green",
@@ -100,7 +104,20 @@ export default function Page() {
           </View>
         )}
       />
-    </View>
+      </View>
+
+      <View className="flex flex-row justify-evenly">
+        <TouchableOpacity className="items-center justify-center rounded-full w-16 h-16 bg-red-200">
+          <Entypo name="cross" size={24} color="red"/>
+
+        </TouchableOpacity>
+        <TouchableOpacity className="items-center justify-center rounded-full w-16 h-16 bg-green-200 ">
+          <Entypo name="heart" size={24} color="green"/>
+
+        </TouchableOpacity>
+
+
+      </View>
 
 
 
