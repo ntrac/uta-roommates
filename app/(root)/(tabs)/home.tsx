@@ -12,7 +12,7 @@ const DUMMY_DATA = [
     firstName: "Xavier",
     lastName: "Rudd",
     occupation: "Software Developer",
-    photoURL: "https://avatars.githubusercontent.com/u/24712956?v=4",
+    photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fcat%2F&psig=AOvVaw2xVFHfhCbNnXNCCdu3KRPf&ust=1729749694500000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLjtyfLpo4kDFQAAAAAdAAAAABAE",
     age: 27,
     id: 1,
   },
@@ -25,8 +25,8 @@ const DUMMY_DATA = [
     id: 2,
   },
   {
-    firstName: "Sonny",
-    lastName: "Sangha",
+    firstName: "Bruce",
+    lastName: "Wayne",
     occupation: "Software Developer",
     photoURL: "https://www.biography.com/.image/ar_1:1,c_fill,cs_srgb,progressive,q_auto:good,w_1200/MTc5OTkzODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg",
     age: 21,
@@ -85,7 +85,7 @@ export default function Page() {
             }
           },
         }}
-        renderCard={(card) => (
+        renderCard={(card) => card ? (
           <View key={card.id} className="relative bg-white h-3/4 rounded-xl">
             <Image
               className="absolute top-0 h-full w-full rounded-xl"
@@ -101,6 +101,16 @@ export default function Page() {
               <Text>{card.occupation}</Text>
               <Text>{card.age} years</Text>
             </View>
+          </View>
+        ) : (
+          <View className= "relative bg-white h-3/4 rounded-xl justify-center items-center" style={styles.cardShadow}>
+            <Text className="font-bold pb-5">No more profiles</Text>
+        <Image
+            className="h-20 w-full"
+            height={100}
+            width={100}
+            source={{ uri: "https://links.papareact.com/6gb" }}
+        />
           </View>
         )}
       />
