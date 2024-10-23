@@ -48,7 +48,7 @@ const SignIn = () => {
             name="envelope"
             size={18}
             color="#A0AEC0"
-            className="mr-2"
+            // className="mr-2"
           />
           <TextInput
             className="flex-1 ml-3 p-2"
@@ -66,7 +66,9 @@ const SignIn = () => {
       <View className="w-full mb-6">
         <Text className="text-gray-600 mb-2">Password</Text>
         <View className="flex-row items-center border border-gray-300 rounded-full px-3 py-2">
-          <FontAwesome name="lock" size={18} color="#A0AEC0" className="mr-2" />
+          <FontAwesome name="lock" size={18} color="#A0AEC0" 
+          // className="mr-2" 
+          />
           <TextInput
             className="flex-1 ml-3 p-2"
             placeholder="Enter your password"
