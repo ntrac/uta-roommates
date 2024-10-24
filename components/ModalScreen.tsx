@@ -5,6 +5,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db } from '@/firebaseConfig';
 import { router } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const ModalScreen = () => {
   const { user } = useUser();
@@ -37,6 +38,7 @@ const ModalScreen = () => {
   }
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <View className="flex-1 items-center pt-1">
       <Text className='text-xl p-2 text-gray-500 font-bold'>
         Welcome {user?.username || firstName}
@@ -105,6 +107,7 @@ const ModalScreen = () => {
         <Text>Update Profile</Text>
       </TouchableOpacity>
     </View>
+    </GestureHandlerRootView>
   )
 }
 

@@ -1,11 +1,15 @@
 import { SignedIn, SignedOut, useUser, useAuth } from "@clerk/clerk-expo";
 import { Entypo } from "@expo/vector-icons";
-import { Link } from "expo-router";
-import React, { useRef } from "react";
+import { Link, router } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Image } from "react-native";
 import Swiper from "react-native-deck-swiper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from '@/firebaseConfig';
+import ModalScreen from "@/components/ModalScreen";
+// import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const DUMMY_DATA = [
   {
@@ -41,6 +45,28 @@ export default function Page() {
 
   const swipeRef = useRef(null);
 
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
+
+  useEffect(() => {
+    // Check if user exists in Firebase Firestore
+    const checkUserInDatabase = async () => {
+      if (user) {
+        const userDocRef = doc(db, 'users', user.id);
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (!userDocSnap.exists()) {
+          // If user does not exist, show the ModalScreen
+          setIsProfileComplete(false);
+        } else {
+          // If user exists, proceed as normal
+          setIsProfileComplete(true);
+        }
+      }
+    };
+
+    checkUserInDatabase();
+  }, [user]);
+
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -49,7 +75,13 @@ export default function Page() {
     }
   };
 
+  if (!isProfileComplete) {
+    // Optionally, you could display a loading screen while checking the user profile
+    return <ModalScreen />;
+  }
+
   return (
+    // <GestureHandlerRootView style={{ flex: 1 }}>
     <SafeAreaView className="flex-1">
       <SignedIn>
       
@@ -149,7 +181,9 @@ export default function Page() {
         </Link>
       </SignedOut>
     </SafeAreaView>
+    // {/* </GestureHandlerRootView> */}
   );
+  
 }
 
 const styles = StyleSheet.create({
