@@ -9,7 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from '@/firebaseConfig';
 import ModalScreen from "@/components/ModalScreen";
-// import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 
 const DUMMY_DATA = [
   {
@@ -44,6 +44,7 @@ export default function Page() {
   const { signOut } = useAuth();
 
   const swipeRef = useRef(null);
+  const [profiles, setProfiles] = useState([]);
 
   const [isProfileComplete, setIsProfileComplete] = useState(false);
 
@@ -76,21 +77,19 @@ export default function Page() {
   };
 
   if (!isProfileComplete) {
-    // Optionally, you could display a loading screen while checking the user profile
     return <ModalScreen />;
   }
 
   return (
-    // <GestureHandlerRootView style={{ flex: 1 }}>
     <SafeAreaView className="flex-1">
       <SignedIn>
-      
+      ß
       {/* card */}
         <View className="flex-1 -mt-6">
           <Swiper
             ref={swipeRef}
             containerStyle={{ backgroundColor: 'transparent' }}
-            cards={DUMMY_DATA}
+            cards={DUMMY_DATA} //Change it to profiles later
             stackSize={5}
             cardIndex={0}
             animateCardOpacity
@@ -137,12 +136,12 @@ export default function Page() {
         ) : (
           <View className= "relative bg-white h-3/4 rounded-xl justify-center items-center" style={styles.cardShadow}>
             <Text className="font-bold pb-5">No more profiles</Text>
-        <Image
-            className="h-20 w-full"
-            height={100}
-            width={100}
-            source={{ uri: "https://links.papareact.com/6gb" }}
-        />
+            <Image
+              className="h-20 w-full"
+              height={100}
+              width={100}
+              source={{ uri: "https://links.papareact.com/6gb" }}
+            />
           </View>
         )}
       />
@@ -181,7 +180,6 @@ export default function Page() {
         </Link>
       </SignedOut>
     </SafeAreaView>
-    // {/* </GestureHandlerRootView> */}
   );
   
 }

@@ -26,3 +26,4 @@ expo-env.d.ts
 # Firebase configuration files in the root folder
 GoogleService-Info.plist
 google-services.json
+firebaseConfig.ts
