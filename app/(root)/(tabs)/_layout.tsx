@@ -8,7 +8,7 @@
 //   focused,
 // }: {
 //   source: ImageSourcePropType;
-//   focused: boolean;
+//   focused: boolean;ß
 // }) => (
 //   <View
 //     className={`flex flex-row justify-center items-center rounded-full ${focused ? "bg-general-300" : ""}`}
