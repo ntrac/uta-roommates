@@ -1,12 +1,12 @@
 import { SignedIn, SignedOut, useUser, useAuth } from "@clerk/clerk-expo";
 import { Entypo } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Image } from "react-native";
 import Swiper from "react-native-deck-swiper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from '@/firebaseConfig';
 import ModalScreen from "@/components/ModalScreen";
 
@@ -16,7 +16,7 @@ const DUMMY_DATA = [
     firstName: "Xavier",
     lastName: "Rudd",
     occupation: "Software Developer",
-    photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fcat%2F&psig=AOvVaw2xVFHfhCbNnXNCCdu3KRPf&ust=1729749694500000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLjtyfLpo4kDFQAAAAAdAAAAABAE",
+    photoURL: "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg", // direct image URL
     age: 27,
     id: 1,
   },
@@ -47,6 +47,16 @@ export default function Page() {
   const [profiles, setProfiles] = useState([]);
 
   const [isProfileComplete, setIsProfileComplete] = useState(false);
+
+  // useLayoutEffect(() => {
+  //   onSnapshot(doc(db, 'users', user.uid), snapshot => {
+  //     if (!snapshot.exists) {
+  //       NavigationPreloadManager.navigate('Modal')
+  //     } else {
+  //       setIsProfileComplete(false);
+  //     }
+  //   }
+  // },[])
 
   useEffect(() => {
     // Check if user exists in Firebase Firestore
@@ -83,7 +93,6 @@ export default function Page() {
   return (
     <SafeAreaView className="flex-1">
       <SignedIn>
-      ß
       {/* card */}
         <View className="flex-1 -mt-6">
           <Swiper

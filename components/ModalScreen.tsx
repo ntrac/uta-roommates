@@ -31,7 +31,7 @@ const ModalScreen = () => {
         timestamp: serverTimestamp(),
       });
       // Redirect to the home page
-      router.push(`../app/(root)/(tabs)/home`);
+      await router.push("/(root)/(tabs)/home");
     } catch (error) {
       console.error("Error updating profile: ", error);
     }
